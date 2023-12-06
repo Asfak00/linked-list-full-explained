@@ -25,3 +25,15 @@
 এভাবে যত ইচ্ছে তত গুলো নোড যুক্ত করা যায়।
 
 ট্রেনের এক একটা আলাদা ব্লককে আমরা বলি বগি, লিঙ্কড লিস্টে আমরা বলব নোড।
+
+<h4>Linked List দুই ধরণের। নিচে দেওয়া হলঃ</h4>
+
+<ul>
+    <li>Singly Linked List</li>
+    <li>Doubly Linked List</li>
+</ul>
+
+</br>
+
+<h2>Singly Linked List</h2>
+>
