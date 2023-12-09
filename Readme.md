@@ -135,8 +135,75 @@ unshift(value) {
 ```
 
 </br>
-<h2>Dubbly Linked List</h2>
+<h2>Doubly Linked List</h2>
 <img src="https://www.boardinfinity.com/blog/content/images/2022/11/Untitled-design--16-.jpg" alt="reference image">
 
 </br>
-> উপরের ছবিটি লক্ষ করুন, dubbly linked list এর সবকিছু সেইম singly linked list এর মতো, শুধু পরিবর্তনটি হচ্ছে singly linked list এ আমরা previous নামে কোনো জিনিস পেতাম না কিন্তু dubbly linked list এ আমরা previous নামে একটা property পাচ্ছি যেটার মাধ্যমে আমাদের currentNode এর আগের node কোনটি সেটা জানতে পারবো। তাছাড়া বাকি সব singly linked list এর মতো।
+> উপরের ছবিটি লক্ষ করুন, Doubly linked list এর সবকিছু সেইম singly linked list এর মতো, শুধু পরিবর্তনটি হচ্ছে singly linked list এ আমরা previous নামে কোনো জিনিস পেতাম না কিন্তু Doubly linked list এ আমরা previous নামে একটা property পাচ্ছি যেটার মাধ্যমে আমাদের currentNode এর আগের node কোনটি সেটা জানতে পারবো। তাছাড়া বাকি সব singly linked list এর মতো।
+
+<h2>Doubly Linked List - Add the node in the last position of the list using the <b>PUSH</b> method</h2>
+> Singly Linked List এ আমরা যেভাবে push method ইমপ্লেমেন্ট করে লিস্টের শেষের দিকে node যুক্ত করেছিলাম ঠিক সেইভাবেই Doubly Linked List এ করতে পারবো, শুধু একটি জিনিস বাড়বে আরা সেটা হচ্ছে previous point. উপরে বলা হয়েছে যে Doubly Linked List এ মোট তিনটি প্রপার্টি পাবো (value, next, prev)। সেইম ভাবে আমাদের head এবং tail থাকবে লিস্টে এবং length থাকবে। প্রথমে আমরা চেক করে নিবো যে আমাদের লিস্টে কোনো node আছে কি না, যদি না থাকে তাহলে তো আমরা যে node যুক্ত করবো সেটা হবে head এবং সেটাই হবে tail আর প্রথম node এর next value থাকবে null এবং prev value থাকবে null। তারপর যদি আমাদের লিস্টে আগে থেকে একটি node যুক্ত করা থাকে তাহলে আমরা যখন আরেকটি নতুন node যুক্ত করবো তখন তো ওই node এর next এবং prev value অবশ্যই থাকবে। আর সেটা আমরা এভাবে করবো যে আমাদের বর্তমান যে tail রয়েছে সেটার next এর value সমান করে দিবো আমাদের নতুন যে node যুক্ত হতে চাচ্ছে সেটাকে এবং আমাদের নতুন node এর prev value সেট করে দিবো আমাদের যে tail রয়েছে সেটাকে এবং অবশেষে আমাদের tail এর value সেট করে দিবো আমাদের নতুন যে node যুক্ত হতে চাচ্ছে সেটাকে, ব্যাস আমাদের কাজ হয়ে গেছে সবার শেষে আমরা আমাদের লিস্টের length বাড়িয়ে দিবো।
+
+</br>
+
+> নিচের কোডের মাধ্যমে আরো ভালোভাবে Doubly Linked List এ Push method ইমপ্লিমেন্ট করা হলো।
+
+```js
+// push method implement
+
+// একটা টেম্পলেট তৈরি করে নিলাম যাতে আলাদা করে আবার সব প্রপার্টি গুলো লিখতে না হয়।
+class NodeTemplete {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+// এটা হচ্ছে আমাদের মেইন Doubly Linked List ক্লাস।
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  // চেক করে নিচ্ছি যে আমাদের লিস্ট কি empty নাকি। এটা আমাদের true or false রিটার্ন করবে।
+  isEmpty() {
+    return this.length === 0;
+  }
+
+  // এইটা হচ্ছে আমাদের push method
+  push(value) {
+    // এখানে আমরা যে value পাচ্ছি তা দিয়ে নতুন একটি node তৈরি করে নিচ্ছি। আমরা আগে যে টেম্পলেট তৈরি করেছিলাম সেটা এখানে call করলাম এবং আমাদের value টি দিয়ে দিলাম।
+    let newNode = new NodeTemplete(value);
+
+    // আবার চেক করা হচ্ছে, যদি আমাদের head না থাকে তাহলে if এর কাজ করবে ( head null থাকলে আরকি ) আর যদি head এ কোনো node থেকে থাকে তাহলে else এর কাজ করবে।
+    if (!this.head) {
+      // এখানে আমাদের head করে দিলাম নতুন যে node সেটা।
+      this.head = newNode;
+
+      // এখানে আমাদের tail করে দিলাম নতুন যে node সেটা।
+      this.tail = newNode;
+    } else {
+      // এখানে আমাদের যে tail রয়েছে সেটার next প্রপার্টির value করে দিলাম আমাদের নতুন node কে।
+      this.tail.next = newNode;
+
+      // এখানে আমাদের যে নতুন node রয়েছে সেটার previous value সেট করে দিলাম আমাদের আগের যে tail ছিলো সেটাকে।
+      newNode.prev = this.tail;
+
+      // তারপর যেহেতু আমরা নতুন একটি node শেষের দিকে যুক্ত করলাম, তাই আমাদের লিস্টের tail করে দিলাম আমাদের নতুন node কে।
+      this.tail = newNode;
+    }
+
+    // এখন একটি node যুক্ত করলে তো আমাদের লিস্টের length ও বাড়াতে হবে সেটা এখানে করলাম।
+    this.length++;
+  }
+}
+
+let test = new DoublyLinkedList();
+test.push(5);
+test.push(10);
+
+console.log(test);
+```
