@@ -35,28 +35,39 @@ class SignlyLinkedList {
   }
 
   pop() {
-    // check if the list is empty
     if (this.isEmpty()) {
       return null;
-    }
-
-    // check if the list has only one node
-    if (this.length === 1) {
-      // if the list has only one node, set the head and tail to null
+    } else if (this.length === 1) {
       this.head = null;
       this.tail = null;
+      this.length = 0;
     } else {
-      // if the list has more than one node, set the next property of the second last node to null
       let currentNode = this.head;
+      let newLastNode;
+
       while (currentNode.next !== this.tail) {
         currentNode = currentNode.next;
       }
-      currentNode.next = null;
-      this.tail = currentNode;
-    }
 
-    // decrement the length
-    this.length--;
+      currentNode.next = null;
+      newLastNode = currentNode;
+      this.tail = newLastNode;
+      this.length--;
+    }
+  }
+
+  shift() {
+    if (!this.isEmpty()) {
+      let currentNode = this.head;
+      this.head = currentNode.next;
+      this.length--;
+
+      if (this.length === 0) {
+        this.tail = null;
+      }
+
+      return currentNode;
+    }
   }
 }
 
@@ -65,6 +76,9 @@ const testCode = new SignlyLinkedList();
 testCode.push(5);
 testCode.push(15);
 testCode.push(25);
-testCode.pop();
-
+testCode.push(25);
+testCode.shift();
+testCode.shift();
+testCode.shift();
+testCode.shift();
 console.log(testCode);
