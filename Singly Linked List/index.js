@@ -85,6 +85,18 @@ class SignlyLinkedList {
       this.length++;
     }
   }
+
+  showAllNodeAsArray() {
+    let array = [];
+    let currentNode = this.head;
+
+    while (currentNode) {
+      array.push(currentNode.head);
+      currentNode = currentNode.next;
+    }
+
+    return array;
+  }
 }
 
 const testCode = new SignlyLinkedList();
@@ -92,4 +104,6 @@ const testCode = new SignlyLinkedList();
 testCode.push(5);
 testCode.push(15);
 testCode.unshift(25);
+testCode.unshift(345);
+console.log(testCode.showAllNodeAsArray());
 console.log(testCode);

@@ -133,3 +133,10 @@ unshift(value) {
   }
 
 ```
+
+</br>
+<h2>Dubbly Linked List</h2>
+<img src="https://www.boardinfinity.com/blog/content/images/2022/11/Untitled-design--16-.jpg" alt="reference image">
+
+</br>
+> উপরের ছবিটি লক্ষ করুন, dubbly linked list এর সবকিছু সেইম singly linked list এর মতো, শুধু পরিবর্তনটি হচ্ছে singly linked list এ আমরা previous নামে কোনো জিনিস পেতাম না কিন্তু dubbly linked list এ আমরা previous নামে একটা property পাচ্ছি যেটার মাধ্যমে আমাদের currentNode এর আগের node কোনটি সেটা জানতে পারবো। তাছাড়া বাকি সব singly linked list এর মতো।
