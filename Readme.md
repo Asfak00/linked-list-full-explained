@@ -135,7 +135,7 @@ unshift(value) {
 ```
 
 </br>
-<h2>Doubly Linked List</h2>
+<h1>Doubly Linked List</h1>
 <img src="https://www.boardinfinity.com/blog/content/images/2022/11/Untitled-design--16-.jpg" alt="reference image">
 
 </br>
