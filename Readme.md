@@ -1,5 +1,14 @@
 <h1>Welcome To Learn Linked List</h1>
 
+Here is the all chapter that we will learn in this docs
+
+<ul>
+<li>লিস্টের প্রথম দিকে Node যুক্ত করা</li>
+<li>লিস্টের শেষের দিকে Node যুক্ত করা</li>
+<li>লিস্টের প্রথম দিক থেকে Node delete করা</li>
+<li>লিস্টের শেষের দিক থেকে Node delete করা</li>
+</ul>
+
 </br>
 <h2>What is Linked List?</h2>
 > ডেটা স্টোর করার জন্য অ্যারের মত আরেকটি ডেটা স্ট্যাকচার হচ্ছে Linked List। এটি স্ট্র্যাকচার অনুযায়ী ডাটা স্টোর করে, এবং রান টাইমে নতুন স্পেসের দরকার হলে অটোমেটিকেলি তা তৈরি করে নিতে পারে।  এটি হচ্ছে ডাইনামিক ডেটা স্ট্রাকচার।
