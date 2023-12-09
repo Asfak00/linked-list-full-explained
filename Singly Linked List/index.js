@@ -69,16 +69,27 @@ class SignlyLinkedList {
       return currentNode;
     }
   }
+
+  unshift(value) {
+    let newNode = {
+      head: value,
+      next: null,
+    };
+
+    if (this.isEmpty()) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+    }
+  }
 }
 
 const testCode = new SignlyLinkedList();
 
 testCode.push(5);
 testCode.push(15);
-testCode.push(25);
-testCode.push(25);
-testCode.shift();
-testCode.shift();
-testCode.shift();
-testCode.shift();
+testCode.unshift(25);
 console.log(testCode);

@@ -47,7 +47,7 @@
 উপরের ছবিটি লক্ষ করলে দেখবেন যে একদম প্রথমে head রয়েছে এবং একদম শেষে tail রয়েছে এবং মাঝখানে length রয়েছে। এবং নিচের যে arrow চিহ্ন দিয়ে next next দেখানো হয়েছে ওটা হচ্ছে এড্রেস এবং সেখানে আমরা দেখতে পারবো যে আমাদের এই এলিমেন্টের পরে next কোন এলিমেন্ট রয়েছে। আর এভাবে আমাদের Singly Linked List চলতে থাকবে এবং সবার শেষে মানে tail এ যে থাকবে তার কোনো next value থাকবে না মানে ওই এলিমেন্টের next value null থাকবে।
 
 </br>
-<h2>Singly Linked List - delete last node using POP method</h2>
+<h2>Singly Linked List - delete last node using <b>POP</b> method</h2>
 
 </br>
 <img src="./Diagram_Picture/DiagramPop.png" alt="reference image">
@@ -59,7 +59,7 @@
 > যদি code দেখে বুঝতে চান তাহলে এই রিপোজিটরিতে <b>Singly List List</b> ফোল্ডারের মধ্যে পাবেন সব কোড।
 
 </br>
-<h2>Singly Linked List - delete first node using SHIFT method</h2>
+<h2>Singly Linked List - delete first node using <b>SHIFT</b> method</h2>
 > এবার আমরা চাচ্ছি যে আমাদের লিস্টের মধ্যে থাকা সব node থেকে সবার প্রথমে যেটা থাকবে সেটাকে delete করে দিবো যখন Shift() মেথডটি call করবো তখন। এবং এই কাজটি অনেক সহজ। আমরা প্রথমে চেক করে নিবো যে আমাদের লিস্টটি কি একেবারে খালি নাকি যদি খালি থাকে তাহলে আমরা null রিটার্ন করবো নাহলে আমাদের delete এর করবো। তো delete করার জন্য আমাদের প্রথমে একটি variable নিতে আমাদের যে head রয়েছে সেটাকে currentNode নামক একটি variable এ রাখবো। তারপর আমরা আমাদের লিস্টের যে tail রয়েছে তার সমান currentNode এর next বসিয়ে দিবো ( this.tail = currentNode.next এভাবে )। তাহলেই তো আমাদের delete করা সম্পূর্ণ। এরপর আমরা আমাদের লিস্টের length কমিয়ে দিবো, কারণ একটি node delete হয়ে গেলে তো আমাদের একটি length কমাতে হবে তাই। এরপর আমরা আরেকটা চেক করবো যে যদি আমাদের length === 0 হয় তাহলে tail যেন null হয়ে যায়। কারণ head null হয়ে যাবে shift() call করার মাধ্যমে কিন্তু দেখা যাবে যে আমাদের tail এ value রয়ে গেছে তার কারণে আমরা এটা করবো যে যখন length 0 হয়ে যাবে তখন tail এর value null হয়ে যাবে এবং tail এর next ও null হয়ে যাবে। এককথায় সব কিছু null থাকবে যদি length 0 হয়ে যায়।
 
 > reference এর জন্য নিচে কোড দিয়ে দিলাম কিভাবে shift method implement করা যায়।
@@ -87,4 +87,40 @@ shift() {
       return currentNode;
     }
   }
+```
+
+</br>
+<h2>Singly Linked List - Add the node in the first position of the list using the <b>UNSHIFT</b> method</h2>
+> প্রথমে তো আমরা আমাদের লিস্টে node যুক্ত করেছিলাম লাস্টের দিক দিয়ে যেভাবে কোনো array তে push() method ব্যবহার করে করতাম। কিন্তু এখন আমরা চাচ্ছি যে যখন কোনো node যুক্ত করবো তখন সেই node যেনো আমাদের লিস্টের প্রথম দিকে যুক্ত হয় মানে array এর unshift() method যেভাবে কাজ করে ওইভাবেই। এটা করার জন্য বেশি কোনো কাজ করতে হবে না। আমরা যখন কোনো node যুক্ত করবো তখন ওই node কে আমাদের লিস্টের head বানিয়ে দিবো এবং নতুন যে node তৈরি করেছি সেই node এর next বানিয়ে দিবো আমাদের আগের head যেটা ছিলো ওইটাকে তাহলেই আমাদের node যুক্ত করা হয়ে যাবে।
+
+> বিষয়টি হয়তো ক্লিয়ার হন নি। তাই নিচে কোড দেওয়া হলো এবং কমেন্টের মাধ্যমে বুঝানো হলো কোন লাইন কি কাজে ব্যবহার হচ্ছে।
+
+```js
+// unshift method
+unshift(value) {
+    // এখানে নতুন node তৈরি করা হচ্ছে। যখন unshift method call করা হবে তখন আপনি একটি value দিবেন আর ওই value দিয়েই এই নতুন node তৈরি করা হচ্ছে।
+    let newNode = {
+      head: value,
+      next: null,
+    };
+
+    // চেক করা হচ্ছে আমাদের লিস্ট কি empty। যদি empty হয় তাহলে if এর কাজ করবে না হলে else এর কাজ করবে।
+    if (this.isEmpty()) {
+      // এখন আমাদের লিস্টের head যেটা রয়েছে সেটার value হিসেবে আমাদের নতুন node কে দেয়া হলো
+      this.head = newNode;
+
+      // এখন আমাদের লিস্টের tail যেটা রয়েছে সেটার value হিসেবে আমাদের নতুন node কে দেয়া হলো
+      this.tail = newNode;
+    } else {
+      // আমাদের নতুন node যখন তৈরি করেছিলাম তখন নতুন node এর next কে null রেখেছিলাম তাই এখন ওই নতুন node এর next এর value হিসেবে আমাদের আগের head কে দিয়ে দিচ্ছি।
+      newNode.next = this.head;
+
+      // এখানে আমাদের লিস্টের head এর জায়গায় আমাদের নতুন node কে বসিয়ে দিচ্ছি।
+      this.head = newNode;
+
+      // এবার একটি node যুক্ত হলে তো আমাদের লিস্টের length ও বৃদ্ধি করতে হবে সেটাই এখানে করা হচ্ছে।
+      this.length++;
+    }
+  }
+
 ```
