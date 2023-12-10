@@ -207,3 +207,50 @@ test.push(10);
 
 console.log(test);
 ```
+
+</br>
+<h2>Doubly Linked List - Delete the node in the last position of the list using the <b>POP</b> method</h2>
+> Doubly Linked List এ লাস্টের দিক থেকে কোনো node ডিলিট করা সেইম Singly Linked List এর মতোই শুধু পার্থক্য হচ্ছে Doubly Linked List এ prev যে আরেকটি value থাকে সেটা। ওকে, আমরা Singly Linked List এ লাস্টের দিকের node ডিলিট করার জন্য চেক করতাম যে আমাদের currentNode ( currentNode নামে একটি variable নিতাম এবং এর value সেট করে দিতাম head কে ) কি আমাদের tail এর সমান, যদি সমান হয় তাহলে আমরা currentNode টিকে আমাদের tail বানিয়ে দিতাম এবং currentNode এর next করে দিতাম null। কিন্তু Doubly Linked List এ এর কিছুটা ব্যতিক্রম। আমরা Doubly Linked List এভাবে করবো... প্রথমে চেক করে নিবো আমাদের যদি কোনো node না থাকে তাহলে আমরা জাস্ট null রিটার্ন করে দিবো। আর যদি আমাদের শুধুমাত্র একটি node থেকে থাকে তাহলে আমরা আমাদের লিস্টের head এবং tail কে null করে দিবো ( মানে ওই node টি ডিলিট হয়ে গেছে )। এবার আসি মুল ডিলিটেশনে, আমাদের লিস্টের tail যেটা আছে সেটা প্রথমে আমরা একটি variable এ রাখবো। তারপর আমাদের লিস্টের tail করে দিবো যে বর্তমানে tail আছে তার prev কে ( মানে বর্তমান tail এর previous value যেটা আছে ওইটাকে )। এবার আমরা তো সব লাস্টের node টি ডিলিট করতে চাচ্ছি এবং আমরা জানি যে আমাদের যে tail রয়েছে তার next value হচ্ছে null তাই আমরা যেহেতু এখন নতুন tail তৈরি করে নিয়েছি তাই ওই tail এর next value করে দিবো null। কিন্তু এখনো একটি কাজ বাকি আছে... আমাদের আগের যে tail ছিলো ( মানে ডিলিট করার আগে ) সেটার কিন্তু একটি prev node ছিলো কিন্তু আমরা তো এখন ওই tail ডিলিট করে দিয়েছি তাই আমাদের ওই tail এর prev কে ও null করে দিতে হবে। ব্যাস আমাদের কাজ হয়ে গেছে। এবার জাস্ট লিস্টের length কমিয়ে দিলেই হয়ে যায়।
+
+</br>
+
+> ওকে, পেরা নেয়ার প্রয়োজন নাই নিচে কোড দিচ্ছি এবং সাথে তো কমেন্ট থাকছেই।
+
+```js
+// pop method implement
+pop() {
+    // চেক করে নিচ্ছি লিস্ট কি পুরো খালি।
+    if (!this.head) {
+      return null;
+    }
+
+    // নতুন একটি variable এ আমাদের tail কে রাখলাম।
+    let popNode = this.tail;
+
+    // এবার চেক করে নিচ্ছি যদি আমাদের লিস্টে একটি node থাকে তাহলে আমরা if এর কাজ করবো নাহলে else এর কাজ।
+    if (this.head === 1) {
+      // head কে null করে দিচ্ছি।
+      this.head = null;
+
+      // tail কে null করে দিচ্ছি।
+      this.tail = null;
+    } else {
+
+      // বর্তমানে আমাদের লিস্টের যে tail হবে সে হচ্ছে আমাদের লিস্টের আগে যে tail ছিলো তার previous এ থাকা node।
+      this.tail = popNode.prev;
+
+      // এবং আমাদের লিস্টের আগের tail এর next এর value করে দিচ্ছি null।
+      popNode.next = null;
+
+      // এবং আমাদের লিস্টের আগের tail এ থাকা prev কে ও null করে দিচ্ছি।
+      popNode.prev = null;
+    }
+
+    // লিস্টের length কমাচ্ছি।
+    this.length--;
+
+    // সবার শেষে আমাদের নতুন যে tail তৈরি করলাম সেটা রিটার্ন করে দিচ্ছি।
+    return popNode;
+  }
+
+```

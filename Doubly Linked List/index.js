@@ -31,10 +31,35 @@ class DoublyLinkedList {
       this.length++;
     }
   }
+
+  pop() {
+    if (!this.head) {
+      return null;
+    }
+
+    let popNode = this.tail;
+
+    if (this.head === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = popNode.prev;
+      popNode.next = null;
+      popNode.prev = null;
+    }
+
+    this.length--;
+    return popNode;
+  }
 }
 
 let test = new DoublyLinkedList();
 test.push(5);
 test.push(10);
+test.push(15);
+test.push(25);
+test.pop();
+test.pop();
+test.pop();
 
 console.log(test);
