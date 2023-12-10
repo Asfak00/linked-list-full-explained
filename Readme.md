@@ -352,3 +352,24 @@ shift() {
   }
 
 ```
+
+</br>
+
+<h1>Time complexity - Singly Linked List VS Doubly Linked List</h1>
+
+<h3>Singly Linked List</h3>
+<ul>
+<li>Push - O(1)</li>
+<li>Pop - O(n)</li>
+<li>Unshift - O(1)</li>
+<li>Shift - O(1)</li>
+<li>ShowAllNodeAsArray - O(n)</li>
+</ul>
+
+<h3>Doubly Linked List</h3>
+<ul>
+<li>Push - O(1)</li>
+<li>Pop - O(1)</li>
+<li>Unshift - O(1)</li>
+<li>Shift - O(1)</li>
+</ul>
