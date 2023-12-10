@@ -254,3 +254,101 @@ pop() {
   }
 
 ```
+
+</br>
+<h2>Doubly Linked List - Add the node in the first position of the list using the <b>UNSHIFT</b> method</h2>
+> সংক্ষেপে বুঝার চেষ্টা করি আমরা, যেহেতু আমাদের Doubly linked list এ previous node রয়েছে তাই এটি Singly linke list থেকে ভিন্ন এবং এটিতে Push, Pop, Unshift, Shift এগুলো ইমপ্লিমেন্ট করাও একটু ভিন্ন Singly linked list থেকে। 
+ওকে কাজের কথায় আসি, আমরা এখন Unshift এর মাধ্যমে লিস্টের প্রথম দিকে node যুক্ত করতে চাচ্ছি তাই আমাদের এটি ইমপ্লিমেন্ট করতে হবে। আমরা এটা করবো যে... প্রথমে তো চেক করে নিবো যে আমাদের লিস্টে কোনো node আছে কি না এবং আমাদের নতুন node কে একটি variable এ স্টোর করে রাখবো। তারপর আমাদের লিস্টের যে head রয়েছে তার যে prev node রয়েছে তাকে আমাদের নতুন node করে দিবো ( শুরুতে prev কিন্তু ছিলো null )। এরপর আমাদের নতুন node এর next node করে দিবো আমাদের যে head রয়েছে থাকে এবং আমরা যখন নতুন node লিস্টের প্রথমে যুক্ত করতে চাচ্ছি সেহেতু আমরা যে node যুক্ত করবো সেটিই তো আমাদের head হবে তাই না ? এজন্যই এবার আমরা আমাদের লিস্টের head করে দিবো আমাদের যে নতুন node তাকে ব্যাস আমাদের node যুক্ত করা হয়ে গেছে।
+
+</br>
+
+> বুঝেননি! কোনো ব্যাপার না নিচে কোড দেওয়া হলো এবং সাথে তো অবশ্যই কমেন্ট করা আছে।
+
+```js
+// unshift method implement
+
+// এটা একটি টেম্পলেট নতুন node এর জন্য।
+class NodeTemplete {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+unshift(value) {
+
+    // এখানে আমাদের নতুন node একটি variable এর মধ্যে রাখছি এবং উপরে যে টেম্পলেট তৈরি করেছিলাম সেটা call করে দিয়েছি।
+    let newNode = new NodeTemplete(value);
+
+    // চেক করছি যদি কোনো node না থাকে তাহলে if কাজ করবে থাকলে else কাজ করবে।
+    if (!this.head) {
+
+      // লিস্টের head হয়ে যাবে নতুন node
+      this.head = newNode;
+
+      // লিস্টের tail হয়ে যাবে নতুন node
+      this.tail = newNode;
+    } else {
+
+      // আমাদের লিস্টের যে head রয়েছে তার prev তো null থাকবে তাই না, তো আমরা সেটাকে করে দিচ্ছি নতুন node। কারণ আমরা তো লিস্টের প্রথমে node যুক্ত করতে চাচ্ছি।
+      this.head.prev = newNode;
+
+      // আমাদের নতুন যে node আছে সেটার next তো ইনিশিয়ালি null থাকে তো আমরা সেটাকে করে দিচ্ছি আমাদের লিস্টের যে head আছে সেটা।
+      newNode.next = this.head;
+
+      // সবার শেষে আমরা আমাদের head টা তো পরিবর্তন করতে হবে এবং সেটাই করছি head বানিয়ে দিচ্ছি আমাদের নতুন node কে।
+      this.head = newNode;
+    }
+
+    // এবং ফাইনালি লিস্টের length বাড়িয়ে দিচ্ছি।
+    this.length++;
+  }
+
+```
+
+</br>
+<h2>Doubly Linked List - Delete the node in the first position of the list using the <b>SHIFT</b> method</h2>
+> লিস্টের প্রথম থেকে node ডিলিট করার জন্য আমাদের প্রথমে ধরতে হবে head কে এবং সেটাকে একটি variable এর মধ্যে স্টোর করে রাখবো oldHead নামে ( কারণ আমরা যদি প্রথম থেকে একটি node ডিলিট করি তাহলে তো সেটি আমাদের head ই থাকবে আর head কে ডিলিট করে দিলে তো নতুন আরেকটি node কে head বানিয়ে দিতে হবে )। তারপর চেক করে নিবো যে আমাদের লিস্টে কোনো node আছে নাকি না থাকলে null রিটার্ন করে দিবো এবং যদি শুধু একটি node থাকে লিস্টে তাহলে সেটাকে ডিলিট করে head, tail কে null করে দিবো। এবার, আমরা তো প্রথম থেকে node ডিলিট করতে চাচ্ছি তাই আমাদের যে oldNode রয়েছে সেটার next কে করে দিবো আমাদের নতুন head এবং এটাকে যদি নতুন head করি তাহলে এটার তো অবশ্যই একটি prev node রয়েছে কিন্তু আমরা তো জানি যে head এর prev node null থাকে এবং tail এর next node null থাকে তাহলে তো এবার আমাদের এই node এর prev node null করে দিতে হবে। এবার আমাদের oldNode যেটা ছিলো ( মানে একদম শুরুর যে head ) তার তো একটি next node ছিলো যেটাকে আমরা এখন নতুন head তৈরি করেছি তাই আমাদের এবার ওই oldNode এর next node null করে দিতে হবে তাহলেই আমাদের ডিলিট সম্পূর্ণ হয়ে যাবে। এবং সবার শেষে তো length কমিয়ে দিতে হবে অবশ্য।
+
+</br>
+
+> ওকে, না বুঝে থাকলে নিচে কোড দেওয়া হয়েছে এবং সাথে তো কমেন্ট আছেই।
+
+```js
+// shift method implement
+shift() {
+
+    // চেক করা হচ্ছে যে আমাদের লিস্টে কোনো node আছে কি না।
+    if (!this.head) {
+      return null;
+    }
+
+    // oldNode নামে একটি variable এর মধ্যে আমদের বর্তমান head কে রাখা হচ্ছে।
+    let oldHead = this.head;
+
+    // চেক করা হচ্ছে আমাদের লিস্টে শুধু একটি node থাকলে if কাজ করবে না হলে else কাজ করবে।
+    if (this.head === 1) {
+      // head হয়ে যাবে null
+      this.head = null;
+
+      // tail হয়ে যাবে null
+      this.tail = null;
+    } else {
+
+      // এখন আমাদের লিস্টের নতুন head যাবে আগের head এর next এ থাকা node
+      this.head = oldHead.next;
+
+      // আমাদের লিস্টের আগের head এর next node হয়ে যাবে null
+      oldHead.next = null
+
+      // এখন আমরা যে নতুন head তৈরি করেছি তার prev node হয়ে যাবে null
+      this.head.prev = null;
+    }
+
+    // আমাদের লিস্টের length কমে যাবে।
+    this.length--;
+
+  }
+
+```
